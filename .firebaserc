@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "drink-code": {
+      "hosting": {
+        "hackathon-wwf": [
+          "drink-code"
+        ]
+      }
+    }
+  }
+}
