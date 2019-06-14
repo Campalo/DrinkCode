@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">hackathon-wwf</string>
+    <string name="title_activity_main">hackathon-wwf</string>
+    <string name="package_name">com.drink.code</string>
+    <string name="fileprovider_authority">com.drink.code.fileprovider</string>
+    <string name="custom_url_scheme">com.drink.code</string>
+</resources>
