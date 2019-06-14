@@ -1,0 +1,7 @@
+{
+  "appId": "com.drink.code",
+  "appName": "hackathon-wwf",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/hackathon-wwf"
+}
