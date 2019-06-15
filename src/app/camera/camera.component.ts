@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  HostListener,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -23,8 +17,9 @@ export class CameraComponent implements OnInit {
   // triggered when user arrives on the page
   async ngOnInit() {
     const file = await this.takePicture();
-    const url = await this.uploadPicture(file);
-    this.addPicture(url);
+    const name = `${Math.random()}.jpeg`;
+    const url = await this.uploadPicture(file, name);
+    this.addPicture(url, name);
   }
 
   async takePicture() {
@@ -38,22 +33,28 @@ export class CameraComponent implements OnInit {
       // Whether to allow the user to crop or make small edits
       allowEditing: false,
       // Whether to automatically rotate the image "up" to correct for orientation in portrait mode Default: true
-      correctOrientation: true
+      correctOrientation: true,
+      height: 600,
+      width: 600
     });
     const response = await fetch(image.webPath);
     return response.blob();
   }
 
-  addPicture(url: string) {
+  addPicture(url: string, name: string) {
     this.db.collection('pictures').add({
-      url: url,
-      name: 'chiba'
+      url,
+      description: 'some water',
+      name,
+      location: 'earth',
+      date: 'today'
     });
   }
 
-  uploadPicture(file: Blob): Promise<string> {
-    const ref = this.storage.ref('pictures/myfile.jpeg');
-    ref.put(file);
+  async uploadPicture(file: Blob, name: string): Promise<string> {
+    const ref = this.storage.ref(`pictures/${name}`);
+    console.log(name);
+    await ref.put(file);
     return ref.getDownloadURL().toPromise();
   }
 }
