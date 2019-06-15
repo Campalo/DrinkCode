@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
 
 // Material
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,7 +27,10 @@ import { LayoutComponent } from './layout/layout.component';
     LoginComponent,
     CameraComponent,
     LayoutComponent
-  ],
+  ]
+})
+@NgModule({
+  declarations: [AppComponent, CameraComponent, VoteComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -53,8 +56,10 @@ import { LayoutComponent } from './layout/layout.component';
           { path: 'vote', component: VoteComponent },
           { path: 'camera', component: CameraComponent }
         ]
-      }, {
-        path: 'login', component: LoginComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       }
     ])
   ],
