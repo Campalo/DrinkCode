@@ -27,6 +27,7 @@
     "@capacitor/android": "^1.0.0",
     "@capacitor/cli": "^1.0.0",
     "@capacitor/core": "^1.0.0",
+    "@ionic/pwa-elements": "^1.3.0",
     "firebase": ">= 5.5.7 <7",
     "hammerjs": "^2.0.8",
     "rxjs": "~6.4.0",
