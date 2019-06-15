@@ -1,29 +1,59 @@
-import {Component, OnInit} from '@angular/core';
-import {Plugins, CameraResultType, CameraSource} from '@capacitor/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  HostListener,
+  EventEmitter
+} from '@angular/core';
+import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-camera',
   templateUrl: './camera.component.html',
-  styleUrls: ['./camera.component.css'],
+  styleUrls: ['./camera.component.css']
 })
 export class CameraComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private db: AngularFirestore,
+    private storage: AngularFireStorage
+  ) {}
 
-  ngOnInit() {}
+  // triggered when user arrives on the page
+  async ngOnInit() {
+    const file = await this.takePicture();
+    const url = await this.uploadPicture(file);
+    this.addPicture(url);
+  }
 
   async takePicture() {
     const image = await Plugins.Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
+      // The source to get the photo from
       source: CameraSource.Camera,
+      // How the data should be returned
       resultType: CameraResultType.Uri,
+      // The quality of image to return as JPEG, from 0-100
+      quality: 90,
+      // Whether to allow the user to crop or make small edits
+      allowEditing: false,
+      // Whether to automatically rotate the image "up" to correct for orientation in portrait mode Default: true
+      correctOrientation: true
     });
-    // image.webPath will contain a path that can be set as an image src.
-    // You can access the original file using image.path, which can be
-    // passed to the Filesystem API to read the raw data of the image,
-    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-    var imageUrl = image.webPath;
-    // Can be set to the src of an image now
-    //imageElement.src = imageUrl;
+    const response = await fetch(image.webPath);
+    return response.blob();
+  }
+
+  addPicture(url: string) {
+    this.db.collection('pictures').add({
+      url: url,
+      name: 'chiba'
+    });
+  }
+
+  uploadPicture(file: Blob): Promise<string> {
+    const ref = this.storage.ref('pictures/myfile.jpeg');
+    ref.put(file);
+    return ref.getDownloadURL().toPromise();
   }
 }
