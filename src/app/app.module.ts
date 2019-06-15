@@ -7,15 +7,16 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {environment} from '../environments/environment';
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {VoteComponent} from './vote/vote.component';
 import {CameraComponent} from './camera/camera.component';
-import {MatButtonModule} from '@angular/material/button';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, CameraComponent, VoteComponent],
+  declarations: [AppComponent, VoteComponent, CameraComponent, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
