@@ -1,9 +1,9 @@
 <mat-card
   class="example-card"
-  [@cardAnimator]="animationState"
-  (@cardAnimator.done)="resetAnimationState()"
-  (swipeleft)="startAnimation('swing')"
-  (swiperight)="startAnimation('swing')"
+  [@swipe]="swipeState"
+  (@swipe.done)="startAnimation('default')"
+  (swipeleft)="startAnimation('left')"
+  (swiperight)="startAnimation('right')"
 >
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
