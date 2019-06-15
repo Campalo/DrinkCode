@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, keyframes, animate, transition, state, style } from '@angular/animations';
-import * as kf from './keyframes';
 
 @Component({
   selector: 'app-vote',
