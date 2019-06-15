@@ -12,7 +12,6 @@ export class CameraComponent implements OnInit {
   ngOnInit() {}
 
   async takePicture() {
-    console.log('picture will be taken');
     const image = await Plugins.Camera.getPhoto({
       quality: 90,
       allowEditing: true,
@@ -26,6 +25,5 @@ export class CameraComponent implements OnInit {
     var imageUrl = image.webPath;
     // Can be set to the src of an image now
     //imageElement.src = imageUrl;
-    console.log('picture taken');
   }
 }
