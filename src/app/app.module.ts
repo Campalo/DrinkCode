@@ -11,12 +11,11 @@ import {MatButtonModule} from '@angular/material/button';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {VoteComponent} from './vote/vote.component';
-import {CameraComponent} from './camera/camera.component';
+import { VoteComponent } from './vote/vote.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [AppComponent, VoteComponent, CameraComponent, LoginComponent],
+  declarations: [AppComponent, VoteComponent, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
