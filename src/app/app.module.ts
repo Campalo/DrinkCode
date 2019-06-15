@@ -9,10 +9,11 @@ import {MatCardModule} from '@angular/material/card';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { VoteComponent } from './vote/vote.component';
+import {VoteComponent} from './vote/vote.component';
+import {CameraComponent} from '../app/camera/camera.component';
 
 @NgModule({
-  declarations: [AppComponent, VoteComponent],
+  declarations: [AppComponent, CameraComponent, VoteComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -20,7 +21,7 @@ import { VoteComponent } from './vote/vote.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    MatCardModule
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
