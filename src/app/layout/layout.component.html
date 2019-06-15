@@ -1,0 +1,15 @@
+<main>
+  <router-outlet></router-outlet>
+</main>
+<nav mat-tab-nav-bar>
+  <div class="routing" fxLayout="row" fxLayoutAlign="space-around center">
+      <a mat-tab-link *ngFor="let route of routes" [routerLink]="[route.path]" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <mat-icon>{{route.icon}}</mat-icon>
+        <span>{{ route.label }}</span>
+      </div>
+    </a>
+  </div>
+
+</nav>
