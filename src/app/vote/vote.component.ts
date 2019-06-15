@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, keyframes, animate, transition, state, style } from '@angular/animations';
+import { trigger, keyframes, animate, transition, state, style, query } from '@angular/animations';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -31,6 +31,32 @@ import { Observable } from 'rxjs';
       transition('* => left', [
         style({transformOrigin: 'left bottom'}), 
         animate(300)]),
+    ]),
+    trigger('points', [
+      transition(':increment', [
+          style({
+            transform: 'translateY(100%)'
+          }),
+          animate(100)
+      ])
+    ]),
+    trigger('star', [
+      transition(':increment', [
+          style({
+            opacity: 0,
+            transform: 'translateY(100%)'
+          }),
+          animate(300)
+      ])
+    ]),
+    trigger('blink', [
+      transition(':increment', [
+          style({
+            opacity: 0,
+            // transform: 'translateY(100%)'
+          }),
+          animate(300)
+      ])
     ])
   ]
 })
