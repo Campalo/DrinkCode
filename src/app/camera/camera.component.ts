@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  HostListener,
+  EventEmitter
+} from '@angular/core';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-camera',
@@ -8,11 +15,16 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./camera.component.css']
 })
 export class CameraComponent implements OnInit {
-  constructor(private db: AngularFirestore) {}
+  constructor(
+    private db: AngularFirestore,
+    private storage: AngularFireStorage
+  ) {}
 
+  // triggered when user arrives on the page
   async ngOnInit() {
-    await this.takePicture();
-    this.addPicture();
+    const file = await this.takePicture();
+    const url = await this.uploadPicture(file);
+    this.addPicture(url);
   }
 
   async takePicture() {
@@ -26,24 +38,22 @@ export class CameraComponent implements OnInit {
       // Whether to allow the user to crop or make small edits
       allowEditing: false,
       // Whether to automatically rotate the image "up" to correct for orientation in portrait mode Default: true
-      correctOrientation: true,
-      // Whether to save the photo to the gallery/photostream
-      saveToGallery: true
-      // The base64 encoded string representation of the image, if using CameraResultType.Base64.
+      correctOrientation: true
     });
-    // image.webPath will contain a path that can be set as an image src.
-    // You can access the original file using image.path, which can be
-    // passed to the Filesystem API to read the raw data of the image,
-    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-    var imageUrl = image.webPath;
-    // Can be set to the src of an image now
-    //imageElement.src = imageUrl;
+    const response = await fetch(image.webPath);
+    return response.blob();
   }
 
-  addPicture() {
+  addPicture(url: string) {
     this.db.collection('pictures').add({
-      url: 'https://material.angular.io/assets/img/examples/shiba1.jpg',
+      url: url,
       name: 'chiba'
     });
+  }
+
+  uploadPicture(file: Blob): Promise<string> {
+    const ref = this.storage.ref('pictures/myfile.jpeg');
+    ref.put(file);
+    return ref.getDownloadURL().toPromise();
   }
 }
