@@ -19,7 +19,6 @@ import { VoteComponent } from './vote/vote.component';
 import { CameraComponent } from './camera/camera.component';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
-import { PictureUploadComponent } from './picture-upload/picture-upload.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +26,7 @@ import { PictureUploadComponent } from './picture-upload/picture-upload.componen
     VoteComponent,
     LoginComponent,
     CameraComponent,
-    LayoutComponent,
-    PictureUploadComponent
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
