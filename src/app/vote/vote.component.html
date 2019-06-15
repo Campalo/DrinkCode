@@ -6,32 +6,32 @@
 </header>
 <section fxLayout="row" fxLayoutAligh="center center">
   <ng-container *ngFor="let picture of pictures | async; let i = index">
-    <mat-card
-      *ngIf="i == active"
-      class="example-card"
-      [@swipe]="swipeState"
-      (swipeleft)="next('left', picture)"
-      (swiperight)="next('right', picture)"
-    >
-      <img mat-card-image [src]="picture.url" [alt]="picture.name" />
-      <mat-card-content>
+    <article *ngIf="i == active" class="example-card" [@swipe]="swipeState" (swipeleft)="next('left', picture)"
+      (swiperight)="next('right', picture)">
+      <div class="image" [ngStyle]="{backgroundImage: 'url('+picture.url+')'}"></div>
+      <div class="description">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div [@blink]="active" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="../../assets/skull.svg"/>
+              <span>dirty</span>
+            </div>
+          </div>
+          <div [@blink]="active" fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="../../assets/water.svg"/>
+              <span>clean</span>
+            </div>
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </div>
+        </div>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
-          cumque eius, labore, excepturi quibusdam quia rerum tenetur, neque
-          nulla soluta et tempora officia amet similique architecto distinctio
-          reiciendis deleniti mollitia.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat esse iure dicta laudantium quisquam
+          voluptatem, ratione facere tenetur nesciunt dolore assumenda nemo voluptas, veritatis amet consequuntur harum
+          perferendis eveniet vero!
         </p>
-      </mat-card-content>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div [@blink]="active" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>keyboard_arrow_left</mat-icon>
-          <span>dirty</span>
-        </div>
-        <div [@blink]="active" fxLayout="row" fxLayoutAlign="start center">
-          <span>clean</span>
-          <mat-icon>keyboard_arrow_right</mat-icon>
-        </div>
       </div>
-    </mat-card>
+    </article>
   </ng-container>
 </section>

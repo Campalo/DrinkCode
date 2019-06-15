@@ -19,6 +19,7 @@ import { VoteComponent } from './vote/vote.component';
 import { CameraComponent } from './camera/camera.component';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LayoutComponent } from './layout/layout.component';
     VoteComponent,
     LoginComponent,
     CameraComponent,
-    LayoutComponent
+    LayoutComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { LayoutComponent } from './layout/layout.component';
         children: [
           { path: '', redirectTo: 'vote', pathMatch: 'full' },
           { path: 'vote', component: VoteComponent },
-          { path: 'camera', component: CameraComponent }
+          { path: 'camera', component: CameraComponent },
+          { path: 'map', component: MapComponent },
         ]
       },
       {
