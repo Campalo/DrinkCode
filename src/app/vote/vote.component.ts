@@ -6,6 +6,11 @@ import * as kf from './keyframes';
   selector: 'app-vote',
   templateUrl: './vote.component.html',
   styleUrls: ['./vote.component.css'],
+  animations: [
+    trigger('cardAnimator', [
+      transition('* => swing', animate(1000, keyframes(kf.swing))),
+    ])
+  ]
 })
 export class VoteComponent implements OnInit {
 
@@ -13,5 +18,21 @@ export class VoteComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
+  animationState: string;
+
+  startAnimation(state) {
+    console.log(state)
+    if (!this.animationState) {
+      this.animationState = state;
+    }
+  }
+
+  resetAnimationState() {
+    this.animationState = '';
+  }
+
+
 
 }
