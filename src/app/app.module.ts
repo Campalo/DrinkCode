@@ -10,7 +10,7 @@ import {MatCardModule} from '@angular/material/card';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {VoteComponent} from './vote/vote.component';
-import {CameraComponent} from '../app/camera/camera.component';
+import {CameraComponent} from './camera/camera.component';
 import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
