@@ -1,4 +1,13 @@
-<header></header>
+<header fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    <span>dirty</span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <span>clean</span>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </div>
+</header>
 <section>
   <ng-container *ngFor="let picture of pictures | async; let i = index">
     <mat-card
@@ -14,6 +23,12 @@
         <mat-card-subtitle>Dog Breed</mat-card-subtitle>
       </mat-card-header>
       <img mat-card-image [src]="picture.url" [alt]="picture.name" />
+      <mat-card-actions fxLayout="row-reverse">
+        <button mat-button>
+          <mat-icon>share</mat-icon>
+          share
+        </button>
+      </mat-card-actions>
     </mat-card>
   </ng-container>
 </section>
