@@ -1,4 +1,10 @@
-<mat-card class="example-card">
+<mat-card
+  class="example-card"
+  [@cardAnimator]="animationState"
+  (@cardAnimator.done)="resetAnimationState()"
+  (swipeleft)="startAnimation('swing')"
+  (swiperight)="startAnimation('swing')"
+>
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>Shiba Inu</mat-card-title>
