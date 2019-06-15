@@ -28,17 +28,15 @@ import * as kf from './keyframes';
   ]
 })
 export class VoteComponent implements OnInit {
-
+  
+  swipeState = 'default';
+  
   constructor() { }
 
   ngOnInit() {
   }
 
+  next(){
 
-  swipeState = 'default';
-
-  startAnimation(state) {
-    this.swipeState = state;
   }
-
 }
