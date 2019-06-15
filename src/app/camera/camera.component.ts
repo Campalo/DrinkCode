@@ -13,10 +13,19 @@ export class CameraComponent implements OnInit {
 
   async takePicture() {
     const image = await Plugins.Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
+      // The source to get the photo from
       source: CameraSource.Camera,
+      // How the data should be returned
       resultType: CameraResultType.Uri,
+      // The quality of image to return as JPEG, from 0-100
+      quality: 90,
+      // Whether to allow the user to crop or make small edits
+      allowEditing: false,
+      // Whether to automatically rotate the image "up" to correct for orientation in portrait mode Default: true
+      correctOrientation: true,
+      // Whether to save the photo to the gallery/photostream
+      saveToGallery: true,
+      // The base64 encoded string representation of the image, if using CameraResultType.Base64.
     });
     // image.webPath will contain a path that can be set as an image src.
     // You can access the original file using image.path, which can be
