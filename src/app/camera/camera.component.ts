@@ -1,15 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {Plugins, CameraResultType, CameraSource} from '@capacitor/core';
+import { Component, OnInit } from '@angular/core';
+import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-camera',
   templateUrl: './camera.component.html',
-  styleUrls: ['./camera.component.css'],
+  styleUrls: ['./camera.component.css']
 })
 export class CameraComponent implements OnInit {
-  constructor() {}
+  constructor(private db: AngularFirestore) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    await this.takePicture();
+    this.addPicture();
+  }
 
   async takePicture() {
     const image = await Plugins.Camera.getPhoto({
@@ -24,7 +28,7 @@ export class CameraComponent implements OnInit {
       // Whether to automatically rotate the image "up" to correct for orientation in portrait mode Default: true
       correctOrientation: true,
       // Whether to save the photo to the gallery/photostream
-      saveToGallery: true,
+      saveToGallery: true
       // The base64 encoded string representation of the image, if using CameraResultType.Base64.
     });
     // image.webPath will contain a path that can be set as an image src.
@@ -34,5 +38,12 @@ export class CameraComponent implements OnInit {
     var imageUrl = image.webPath;
     // Can be set to the src of an image now
     //imageElement.src = imageUrl;
+  }
+
+  addPicture() {
+    this.db.collection('pictures').add({
+      url: 'https://material.angular.io/assets/img/examples/shiba1.jpg',
+      name: 'chiba'
+    });
   }
 }
