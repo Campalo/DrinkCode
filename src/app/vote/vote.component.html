@@ -1,6 +1,6 @@
 <header>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <mat-icon [@star]="active">star</mat-icon>
+    <mat-icon [@star]="active" id="star">star</mat-icon>
     <span [@points]="active">{{ active }}</span>
   </div>
 </header>
@@ -10,8 +10,8 @@
       *ngIf="i == active"
       class="example-card"
       [@swipe]="swipeState"
-      (swipeleft)="next('left')"
-      (swiperight)="next('right')"
+      (swipeleft)="next('left', picture)"
+      (swiperight)="next('right', picture)"
     >
       <img mat-card-image [src]="picture.url" [alt]="picture.name" />
       <mat-card-content>
