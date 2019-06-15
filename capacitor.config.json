@@ -3,5 +3,6 @@
   "appName": "hackathon-wwf",
   "bundledWebRuntime": false,
   "npmClient": "npm",
+  "windowsAndroidStudioPath": "D:\\logiciels\\Android\\bin\\studio64.exe",
   "webDir": "dist/hackathon-wwf"
 }
