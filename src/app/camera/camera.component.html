@@ -1,6 +1,16 @@
 <!-- <image></image> -->
-<h2>location:{{ location }}</h2>
-<h2>date:{{ date }}</h2>
-<p>Description:</p>
-<button>Add to map</button>
-<button>Cancel</button>
+<section *ngIf="blobUrl">
+  <h2>location:{{ location }}</h2>
+  <h2>date:{{ date }}</h2>
+  <form
+    [formGroup]="checkoutForm"
+    (ngSubmit)="onSubmit(checkoutForm.value.description)"
+  >
+    <div>
+      <label>Description: </label>
+      <input type="text" formControlName="description" />
+    </div>
+    <button mat-button class="button" type="submit">Add to map</button>
+    <button mat-button>Cancel</button>
+  </form>
+</section>

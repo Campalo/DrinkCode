@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -32,6 +33,8 @@ import { LayoutComponent } from './layout/layout.component';
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
+    FormsModule,
     // Firebase
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
