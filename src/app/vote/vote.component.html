@@ -1,14 +1,10 @@
-<header fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <mat-icon>keyboard_arrow_left</mat-icon>
-    <span>dirty</span>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <span>clean</span>
-    <mat-icon>keyboard_arrow_right</mat-icon>
+<header>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-icon [@star]="active">star</mat-icon>
+    <span [@points]="active">{{ active }}</span>
   </div>
 </header>
-<section>
+<section fxLayout="row" fxLayoutAligh="center center">
   <ng-container *ngFor="let picture of pictures | async; let i = index">
     <mat-card
       *ngIf="i == active"
@@ -17,18 +13,25 @@
       (swipeleft)="next('left')"
       (swiperight)="next('right')"
     >
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{ picture.name }}</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
       <img mat-card-image [src]="picture.url" [alt]="picture.name" />
-      <mat-card-actions fxLayout="row-reverse">
-        <button mat-button>
-          <mat-icon>share</mat-icon>
-          share
-        </button>
-      </mat-card-actions>
+      <mat-card-content>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
+          cumque eius, labore, excepturi quibusdam quia rerum tenetur, neque
+          nulla soluta et tempora officia amet similique architecto distinctio
+          reiciendis deleniti mollitia.
+        </p>
+      </mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div [@blink]="active" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+          <span>dirty</span>
+        </div>
+        <div [@blink]="active" fxLayout="row" fxLayoutAlign="start center">
+          <span>clean</span>
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
+      </div>
     </mat-card>
   </ng-container>
 </section>
