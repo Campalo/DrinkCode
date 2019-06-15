@@ -69,11 +69,15 @@ export class VoteComponent implements OnInit {
   constructor(private db: AngularFirestore) { }
 
   ngOnInit() {
-    this.pictures = this.db.collection('pictures').valueChanges();
+    this.pictures = this.db.collection('pictures').valueChanges({idField: 'id'});
   }
 
-  next(direction: 'right' | 'left') {
+  next(direction: 'right' | 'left', picture) {
+    const update = direction === 'left'
+    ? { clean : picture.clean ? picture.clean++ : 1 }
+    : { dirty: picture.dirty ? picture.dirty++ : 1}
     this.swipeState = direction;
+    this.db.doc(`pictures/${picture.id}`).update(update)
     setTimeout(() => {
       this.swipeState = '';
       this.active++;  
