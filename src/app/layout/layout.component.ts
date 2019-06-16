@@ -12,13 +12,13 @@ export class LayoutComponent implements OnInit {
     path: 'vote',
     icon: 'thumbs_up_down'
   }, {
-    label: 'Map',
-    path: 'map',
-    icon: 'map'
-  }, {
     label: 'Camera',
     path: 'camera',
     icon: 'local_see'
+  }, {
+    label: 'Map',
+    path: 'map',
+    icon: 'map'
   }];
 
   constructor() { }
