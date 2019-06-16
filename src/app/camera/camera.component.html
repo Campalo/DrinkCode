@@ -1,6 +1,9 @@
-<!-- <image></image> -->
-<h2>location:{{ location }}</h2>
-<h2>date:{{ date }}</h2>
-<p>Description:</p>
-<button>Add to map</button>
-<button>Cancel</button>
+<section @form *ngIf="blobUrl">
+  <h2>Location: {{ location.longitude }} : {{ location.latitude }}</h2>
+  <h2>Date: {{ date | date }}</h2>
+  <mat-form-field fxLayout="column" fxLayoutAlign="start start">
+    <label>Add a description</label>
+    <textarea matInput #description></textarea>
+  </mat-form-field>
+  <button mat-button (click)="submit(description.value)">Add to the map</button>
+</section>

@@ -1,25 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
+import { Plugins, CameraResultType, CameraSource, Geolocation, GeolocationPosition } from '@capacitor/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { trigger, transition, query, style, stagger, animate, sequence } from '@angular/animations';
 
 @Component({
   selector: 'app-camera',
   templateUrl: './camera.component.html',
-  styleUrls: ['./camera.component.css']
+  styleUrls: ['./camera.component.css'],
+  animations: [
+    trigger('form', [
+      transition(':enter', [
+        query('*', [
+          style({ opacity: 0, transform: 'translateY(20px)'}),
+          stagger(30, animate('300ms ease-out'))
+        ])
+      ])
+    ])
+  ]
 })
 export class CameraComponent implements OnInit {
+  public blobUrl: string;
+  public location: { longitude: number, latitude: number};
+  public date: Date;
   constructor(
     private db: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private snackbar: MatSnackBar,
   ) {}
 
   // triggered when user arrives on the page
   async ngOnInit() {
-    const file = await this.takePicture();
-    const name = `${Math.random()}.jpeg`;
-    const url = await this.uploadPicture(file, name);
-    this.addPicture(url, name);
+    this.takePicture();
   }
 
   async takePicture() {
@@ -37,8 +50,11 @@ export class CameraComponent implements OnInit {
       height: 600,
       width: 600
     });
-    const response = await fetch(image.webPath);
-    return response.blob();
+    const position = await Geolocation.getCurrentPosition();
+    this.location = position.coords;
+    this.date = new Date();
+    this.blobUrl = image.webPath;
+
   }
 
   addPicture(url: string, name: string) {
@@ -53,8 +69,20 @@ export class CameraComponent implements OnInit {
 
   async uploadPicture(file: Blob, name: string): Promise<string> {
     const ref = this.storage.ref(`pictures/${name}`);
-    console.log(name);
     await ref.put(file);
     return ref.getDownloadURL().toPromise();
+  }
+
+  async submit(description: string) {
+    if (!this.blobUrl) {
+      return;
+    }
+    this.snackbar.open('Uploading your image');
+    const name = `${Math.random()}.jpeg`;
+    const response = await fetch(this.blobUrl);
+    const file = await response.blob();
+    const url = await this.uploadPicture(file, name);
+    this.db.collection('pictures').add({ url, description, name });
+    this.snackbar.open('Thanks for contributing', 'dismiss', { duration: 500 });
   }
 }
